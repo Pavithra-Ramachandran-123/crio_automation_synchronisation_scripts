@@ -67,7 +67,7 @@ public class QkartSanity {
 
         // Save the last generated username
         lastGeneratedUserName = registration.lastGeneratedUsername;
-
+        //lastGeneratedUserName = registration.Username;
         // Visit the login page and login with the previuosly registered user
         Login login = new Login(driver);
         login.navigateToLoginPage();
@@ -122,6 +122,8 @@ public class QkartSanity {
         int totalTests = 0;
         int passedTests = 0;
         Boolean status;
+        //WebDriver driver;
+        RemoteWebDriver driver =createDriver();
         // Maximize and Implicit Wait for things to initailize
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

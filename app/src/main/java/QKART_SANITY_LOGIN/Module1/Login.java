@@ -32,7 +32,7 @@ public class Login {
         username_txt_box.sendKeys(Username);
 
         // Wait for user name to be entered
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         // Find the password Text Box
         WebElement password_txt_box = this.driver.findElement(By.id("password"));
@@ -56,7 +56,7 @@ public class Login {
         try {
             // Find the username label (present on the top right of the page)
             WebElement username_label;
-             username_label = this.driver.findElement(By.id("username-text"));
+             username_label = this.driver.findElement(By.className("username-text"));
             return username_label.getText().equals(Username);
         } catch (Exception e) {
             return false;
