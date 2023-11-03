@@ -92,7 +92,11 @@ public class SearchResult {
             WebElement sizeCharElement= parentElement.findElement(By.xpath("//button[text()='Size chart']"));
             //*[@id='root']/div/div/div[3]/div[1]/div[2]/div[1]/div/div[1]/button
             //button[text()='Size chart']
-            status=sizeCharElement.isDisplayed();
+            if(sizeCharElement.isDisplayed()){
+                if(sizeCharElement.getText().equals("SIZE CHART")){
+                    status=true;
+                }
+            }
 
             return status;
         } catch (Exception e) {
@@ -107,8 +111,6 @@ public class SearchResult {
     public Boolean validateSizeChartContents(List<String> expectedTableHeaders, List<List<String>> expectedTableBody,
             WebDriver driver) {
         Boolean status = true;
-        boolean hstatus=true;
-        boolean bstatus=true;
 
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2

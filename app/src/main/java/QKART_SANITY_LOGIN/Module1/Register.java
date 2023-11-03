@@ -33,11 +33,13 @@ public class Register {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         String test_data_username;
+        if(!Username.equals(lastGeneratedUsername)){
         if (makeUsernameDynamic)
             // Concatenate the timestamp to string to form unique timestamp
             test_data_username = Username + "_" + String.valueOf(timestamp.getTime());
         else
         test_data_username = Username;
+        
 
         // Type the generated username in the username field
         username_txt_box.sendKeys(test_data_username);
@@ -66,6 +68,7 @@ public class Register {
 
 
         this.lastGeneratedUsername = test_data_username;
+        }
 
         return this.driver.getCurrentUrl().endsWith("/login");
     }

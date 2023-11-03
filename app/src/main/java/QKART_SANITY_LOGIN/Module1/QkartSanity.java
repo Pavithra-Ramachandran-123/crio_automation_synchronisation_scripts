@@ -301,7 +301,7 @@ public class QkartSanity {
         Checkout checkoutPage = new Checkout(driver);
         checkoutPage.addNewAddress("Addr line 1 addr Line 2 addr line 3");
         checkoutPage.selectAddress("Addr line 1 addr Line 2 addr line 3");
-
+        Thread.sleep(3000);
         // Place the order
         checkoutPage.placeOrder();
         Thread.sleep(3000);

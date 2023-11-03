@@ -139,6 +139,7 @@ public class Home {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find and click on the the Checkout button
             driver.findElement(By.xpath("//button[text()='Checkout']")).click();
+            Thread.sleep(3000);
             return status;
         } catch (Exception e) {
             System.out.println("Exception while clicking on Checkout: " + e.getMessage());

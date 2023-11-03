@@ -58,9 +58,10 @@ public class Checkout {
                     driver.findElements(By.xpath("(//div[@class='MuiBox-root css-0'])[1]"));
             for(WebElement element:searchResults){
                 if(element.getText().contains(addressToSelect)){
+                    
                     element.click();
                     //element.findElement(By.xpath("//button[text()='Add to cart']")).click();
-                    Thread.sleep(3000);
+                    Thread.sleep(5000);
                     return true;
                 }
             }
