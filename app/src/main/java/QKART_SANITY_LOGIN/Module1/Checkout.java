@@ -81,7 +81,8 @@ public class Checkout {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find the "PLACE ORDER" button and click on it
             driver.findElement(By.xpath("//button[text()='PLACE ORDER']")).click();
-            return false;
+            Thread.sleep(2000);
+            return true;
 
         } catch (Exception e) {
             System.out.println("Exception while clicking on PLACE ORDER: " + e.getMessage());
