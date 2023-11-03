@@ -58,7 +58,7 @@ public class Checkout {
                     driver.findElements(By.xpath("(//div[@class='MuiBox-root css-0'])[1]"));
             for(WebElement element:searchResults){
                 if(element.getText().contains(addressToSelect)){
-                    
+
                     element.click();
                     //element.findElement(By.xpath("//button[text()='Add to cart']")).click();
                     Thread.sleep(5000);
@@ -98,7 +98,12 @@ public class Checkout {
         Boolean status=false;
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 07: MILESTONE 6
-            status=driver.findElement(By.xpath("//div[@id='notistack-snackbar']")).isDisplayed();
+            WebElement errorElement=driver.findElement(By.xpath("//div[@id='notistack-snackbar']"));
+            if(errorElement.isDisplayed()){
+                if(errorElement.getText().contains("You do not have enough balance in your wallet for this purchase")){
+                    status=true;
+                }
+            }
             return status;
         } catch (Exception e) {
             System.out.println("Exception while verifying insufficient balance message: " + e.getMessage());

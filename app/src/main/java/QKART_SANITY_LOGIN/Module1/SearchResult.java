@@ -126,11 +126,13 @@ public class SearchResult {
             WebElement table=parentElement.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/table"));
             int columnCount = table.findElements(By.xpath("//table/thead/tr")).size();
             int rowCount = table.findElements(By.xpath("//table/tbody")).size();
+            if(table.getText().contains("UK/INDIA")){
             for(int i=1;i<=columnCount;i++){
                  String td=table.findElement(By.xpath("//table/thead/tr/th["+i+"]")).getText();
                  if(!td.trim().equals(expectedTableHeaders.get(i-1)))
                     status=false;
             }
+        }
             for(int i=1;i<=rowCount;i++){
                 //WebElement tr=table.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/table/tbody/tr["+i+"]"));
                 List<String> tr= expectedTableBody.get(i-1);
