@@ -69,8 +69,6 @@ public class Register {
 
         this.lastGeneratedUsername = test_data_username;
         }
-        // SLEEP_STMT_06: Wait for new user to get created in the backend
-
 
         return this.driver.getCurrentUrl().endsWith("/login");
     }
