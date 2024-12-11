@@ -50,10 +50,7 @@ public class Home {
             WebElement searchBox= driver.findElement(By.xpath("//*[@id='root']/div/div/div[1]/div[2]/div/input"));
             searchBox.clear();
             searchBox.sendKeys(product);
-            //Thread.sleep(3000);
-            WebDriverWait wait= new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("css-1msksyp")));
-
+            Thread.sleep(3000);
             return true;
         } catch (Exception e) {
             System.out.println("Error while searching for a product: " + e.getMessage());
@@ -120,10 +117,8 @@ public class Home {
                     driver.findElements(By.xpath("//div[@class='MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-1msksyp']"));
             for(WebElement element:searchResults){
                 if(element.getText().contains(productName)){
-                    WebDriverWait wait= new WebDriverWait(driver, 30);
-                    WebElement productAddToCart=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Add to cart']")));
-                    productAddToCart.click();
-                    //Thread.sleep(3000);
+                    element.findElement(By.xpath("//button[text()='Add to cart']")).click();
+                    Thread.sleep(3000);
                     return true;
                 }
             }
@@ -144,9 +139,7 @@ public class Home {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find and click on the the Checkout button
             driver.findElement(By.xpath("//button[text()='Checkout']")).click();
-            WebDriverWait wait=new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.urlContains("/checkout"));
-            //Thread.sleep(3000);
+            Thread.sleep(3000);
             return status;
         } catch (Exception e) {
             System.out.println("Exception while clicking on Checkout: " + e.getMessage());
@@ -167,8 +160,6 @@ public class Home {
             // Increment or decrement the quantity of the matching product until the current
             // quantity is reached (Note: Keep a look out when then input quantity is 0,
             // here we need to remove the item completely from the cart)
-            WebDriverWait wait = new WebDriverWait(driver, 20);
-
             List<WebElement> searchResults=
                     driver.findElements(By.xpath("//div[@class='cart MuiBox-root css-0']"));
             for(WebElement element:searchResults){
@@ -179,15 +170,13 @@ public class Home {
                     if(noClicks>0){
                         for(int i=0;i<noClicks;i++){
                             element.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[2]")).click();
-                            //Thread.sleep(3000);
-                            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiBox-root css-olyig7']")));
+                            Thread.sleep(3000);
                         }
                     }
                     else
                     for(int i=0;i<(-1*noClicks);i++){
                         element.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[1]")).click();;
-                        //Thread.sleep(3000);
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiBox-root css-olyig7']")));
+                        Thread.sleep(3000);
                     }
 
                     Thread.sleep(3000);

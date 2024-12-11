@@ -35,9 +35,7 @@ public class Checkout {
             driver.findElement(By.xpath("//button[text()='Add new address']")).click();
             driver.findElement(By.xpath("//textarea[@placeholder='Enter your complete address']")).sendKeys(addresString);
             driver.findElement(By.xpath("//button[text()='Add']")).click();
-            //Thread.sleep(3000);
-            WebDriverWait wait=new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Add new address']")));
+            Thread.sleep(3000);
             return false;
         } catch (Exception e) {
             System.out.println("Exception occurred while entering address: " + e.getMessage());
@@ -56,17 +54,14 @@ public class Checkout {
              * Iterate through all the address boxes to find the address box with matching
              * text, addressToSelect and click on it
              */
-            WebDriverWait wait=new WebDriverWait(driver, 20);
             List<WebElement> searchResults=
                     driver.findElements(By.xpath("(//div[@class='MuiBox-root css-0'])[1]"));
             for(WebElement element:searchResults){
                 if(element.getText().contains(addressToSelect)){
 
                     element.click();
-                    wait.until(ExpectedConditions.elementToBeClickable(element));
                     //element.findElement(By.xpath("//button[text()='Add to cart']")).click();
-                    //Thread.sleep(5000);
-
+                    Thread.sleep(5000);
                     return true;
                 }
             }
@@ -87,9 +82,7 @@ public class Checkout {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find the "PLACE ORDER" button and click on it
             driver.findElement(By.xpath("//button[text()='PLACE ORDER']")).click();
-            WebDriverWait wait=new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.urlContains("/thanks"));
-            //Thread.sleep(2000);
+            Thread.sleep(2000);
             return true;
 
         } catch (Exception e) {
