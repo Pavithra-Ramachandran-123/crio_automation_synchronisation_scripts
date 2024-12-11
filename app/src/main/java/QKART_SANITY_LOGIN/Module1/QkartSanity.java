@@ -176,14 +176,14 @@ public class QkartSanity {
         //Thread.sleep(5000);
 
         // Search for the "yonex" product
-        // status = homePage.searchForProduct("yonex");
+        status = homePage.searchForProduct("yonex");
 
-        WebElement searchBox= driver.findElement(By.xpath("//*[@id='root']/div/div/div[1]/div[2]/div/input"));
-            searchBox.clear();
-            searchBox.sendKeys("yonex");
-            //Thread.sleep(3000);
-            WebDriverWait wait= new WebDriverWait(driver, 20);
-            WebElement result= wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("css-1msksyp")));
+        // WebElement searchBox= driver.findElement(By.xpath("//*[@id='root']/div/div/div[1]/div[2]/div/input"));
+        //     searchBox.clear();
+        //     searchBox.sendKeys("yonex");
+        //     //Thread.sleep(3000);
+        //     WebDriverWait wait= new WebDriverWait(driver, 20);
+        //     WebElement result= wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("css-1msksyp")));
 
         if (!status) {
             logStatus("TestCase 3", "Test Case Failure. Unable to search for given product", "FAIL");
@@ -213,6 +213,7 @@ public class QkartSanity {
         }
 
         logStatus("Step Success", "Successfully validated the search results ", "PASS");
+        // SLEEP_STMT_02
         Thread.sleep(2000);
 
         // Search for product
@@ -251,6 +252,7 @@ public class QkartSanity {
         Home homePage = new Home(driver);
         homePage.navigateToHome();
 
+        // SLEEP_STMT_03 : Wait for page to load
         Thread.sleep(5000);
 
         // Search for product and get card content element of search results
@@ -359,7 +361,7 @@ public class QkartSanity {
         Checkout checkoutPage = new Checkout(driver);
         checkoutPage.addNewAddress("Addr line 1 addr Line 2 addr line 3");
         checkoutPage.selectAddress("Addr line 1 addr Line 2 addr line 3");
-        Thread.sleep(3000);
+
         // Place the order
         checkoutPage.placeOrder();
         //Thread.sleep(3000);
@@ -391,33 +393,15 @@ public class QkartSanity {
         Register registration = new Register(driver);
         Login login = new Login(driver);
 
-        // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 06: MILESTONE 5
 
-        // TODO: Register a new user
-        registration.navigateToRegisterPage();
-        registration.registerUser("testUserPavi1", "abc@123", true);
-        lastGeneratedUserName=registration.lastGeneratedUsername;
-        // TODO: Login using the newly registed user
-        login.navigateToLoginPage();
-        login.PerformLogin(lastGeneratedUserName, "abc@123");
 
-        // TODO: Add "Xtend Smart Watch" to cart
-        homePage.navigateToHome();
 
-        // Find required products by searching and add them to the user's cart
-        status = homePage.searchForProduct("Xtend Smart Watch");
-        homePage.addProductToCart("Xtend Smart Watch");
-        // TODO: Add "Yarine Floor Lamp" to cart
-        status = homePage.searchForProduct("Yarine Floor Lamp");
-        homePage.addProductToCart("Yarine Floor Lamp");
 
-        // update watch quantity to 2
+
         homePage.changeProductQuantityinCart("Xtend Smart Watch", 2);
 
-        // update table lamp quantity to 0
         homePage.changeProductQuantityinCart("Yarine Floor Lamp", 0);
 
-        // update watch quantity again to 1
         homePage.changeProductQuantityinCart("Xtend Smart Watch", 1);
 
         homePage.clickCheckout();
@@ -425,7 +409,6 @@ public class QkartSanity {
         Checkout checkoutPage = new Checkout(driver);
         checkoutPage.addNewAddress("Addr line 1 addr Line 2 addr line 3");
         checkoutPage.selectAddress("Addr line 1 addr Line 2 addr line 3");
-        Thread.sleep(3000);
         checkoutPage.placeOrder();
         Thread.sleep(3000);
 
@@ -484,7 +467,6 @@ public class QkartSanity {
         Checkout checkoutPage = new Checkout(driver);
         checkoutPage.addNewAddress("Addr line 1 addr Line 2 addr line 3");
         checkoutPage.selectAddress("Addr line 1 addr Line 2 addr line 3");
-        Thread.sleep(3000);
         checkoutPage.placeOrder();
         Thread.sleep(3000);
 

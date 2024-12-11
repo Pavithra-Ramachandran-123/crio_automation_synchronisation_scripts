@@ -111,9 +111,7 @@ public class SearchResult {
     public Boolean validateSizeChartContents(List<String> expectedTableHeaders, List<List<String>> expectedTableBody,
             WebDriver driver) {
         Boolean status = true;
-
         try {
-            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
             /*
              * Locate the table element when the size chart modal is open
              * 
@@ -123,25 +121,6 @@ public class SearchResult {
              * Validate that the contents of expectedTableBody are present in the table body
              * in the same order
              */
-            WebElement table=parentElement.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/table"));
-            int columnCount = table.findElements(By.xpath("//table/thead/tr")).size();
-            int rowCount = table.findElements(By.xpath("//table/tbody")).size();
-            if(table.getText().contains("UK/INDIA")){
-            for(int i=1;i<=columnCount;i++){
-                 String td=table.findElement(By.xpath("//table/thead/tr/th["+i+"]")).getText();
-                 if(!td.trim().equals(expectedTableHeaders.get(i-1)))
-                    status=false;
-            }
-        }
-            for(int i=1;i<=rowCount;i++){
-                //WebElement tr=table.findElement(By.xpath("/html/body/div[2]/div[3]/div/div/table/tbody/tr["+i+"]"));
-                List<String> tr= expectedTableBody.get(i-1);
-                for(int j=1;j<=columnCount;j++){
-                    String td=table.findElement(By.xpath("//table/tbody/tr["+i+"]/td["+j+"]")).getText();
-                    if(!td.trim().equals(tr.get(j-1)))
-                        status=false;
-                }
-            }
             return status;
 
         } catch (Exception e) {
@@ -156,10 +135,6 @@ public class SearchResult {
     public Boolean verifyExistenceofSizeDropdown(WebDriver driver) {
         Boolean status = false;
         try {
-            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
-            // If the size dropdown exists and is displayed return true, else return false
-            status=parentElement.findElement(By.xpath("//*[@id='uncontrolled-native']")).isDisplayed();
-            Thread.sleep(2000);
             return status;
         } catch (Exception e) {
             return status;

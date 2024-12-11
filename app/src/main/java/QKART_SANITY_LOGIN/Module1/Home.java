@@ -29,6 +29,7 @@ public class Home {
             WebElement logout_button = driver.findElement(By.className("MuiButton-text"));
             logout_button.click();
 
+            // SLEEP_STMT_10: Wait for Logout to complete
             // Wait for Logout to Complete
             Thread.sleep(3000);
 
@@ -107,7 +108,6 @@ public class Home {
      */
     public Boolean addProductToCart(String productName) {
         try {
-            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
              * Iterate through each product on the page to find the WebElement corresponding
              * to the matching productName
@@ -194,6 +194,9 @@ public class Home {
                     return true;
                 }
             }
+
+
+
 
             return false;
         } catch (Exception e) {

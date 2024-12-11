@@ -91,6 +91,7 @@ public class Checkout {
             wait.until(ExpectedConditions.urlContains("/thanks"));
             //Thread.sleep(2000);
             return true;
+            //return false;
 
         } catch (Exception e) {
             System.out.println("Exception while clicking on PLACE ORDER: " + e.getMessage());
