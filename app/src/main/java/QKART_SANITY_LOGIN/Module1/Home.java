@@ -51,9 +51,9 @@ public class Home {
             WebElement searchBox= driver.findElement(By.xpath("//*[@id='root']/div/div/div[1]/div[2]/div/input"));
             searchBox.clear();
             searchBox.sendKeys(product);
-            //Thread.sleep(3000);
-            WebDriverWait wait= new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("css-1msksyp")));
+            Thread.sleep(3000);
+            //WebDriverWait wait= new WebDriverWait(driver, 20);
+            //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class,'css-1msksyp')]")));
 
             return true;
         } catch (Exception e) {
@@ -71,11 +71,16 @@ public class Home {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 03: MILESTONE 1
             // Find all webelements corresponding to the card content section of each of search results
-            searchResults= driver.findElements(By.xpath("//div[@class='MuiCardContent-root css-1qw96cp']"));
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[contains(@class,'css-1msksyp')]")));
+            //searchResults = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[contains(@class,'css-sycj1h')]//child::img")));
+            Thread.sleep(3000);
+            searchResults = driver.findElements(By.xpath("//div[contains(@class,'css-sycj1h')]//child::img"));
+            //searchResults= driver.findElements(By.xpath("//div[contains(@class,'css-1msksyp')]"));
             //*[@id='root']/div/div/div[3]/div[1]/div[2]"
             //*[@id="root"]/div/div/div[3]/div[1]/div[2]/div/div/div[1]
             //*[@id="root"]/div/div/div[3]/div[1]/div[2]/div
-            Thread.sleep(2000);
+            //Thread.sleep(5000);
             return searchResults;
         } catch (Exception e) {
             System.out.println("There were no search results: " + e.getMessage());
@@ -170,29 +175,39 @@ public class Home {
             WebDriverWait wait = new WebDriverWait(driver, 20);
 
             List<WebElement> searchResults=
-                    driver.findElements(By.xpath("//div[@class='cart MuiBox-root css-0']"));
+                    driver.findElements(By.xpath("//div[@class='MuiBox-root css-0']/div"));
+            //System.out.println(searchResults);
             for(WebElement element:searchResults){
+                //System.out.println(element.getText());
                 if(element.getText().contains(productName)){
+                    //System.out.printf("%s present%n",productName);
                     //String a=element.findElement(By.xpath("//div[@class='MuiBox-root css-olyig7']")).getText();
-                    int currQuantity=Integer.parseInt(element.findElement(By.xpath("//div[@class='MuiBox-root css-olyig7']")).getText());
+                    int currQuantity=Integer.parseInt(element.findElement(By.xpath(".//div[@data-testid='item-qty']")).getText());
+                    Thread.sleep(2000);
                     int noClicks=quantity-currQuantity;
                     if(noClicks>0){
                         for(int i=0;i<noClicks;i++){
-                            element.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[2]")).click();
-                            //Thread.sleep(3000);
-                            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiBox-root css-olyig7']")));
+                            element.findElement(By.xpath(".//div[@class='css-u4p24i']/button[2]")).click();
+                            Thread.sleep(3000);
+                            //System.out.println("postv count");
+                            //wait.until(ExpectedConditions.presenceOfElementLocated(By.className("MuiBox-root css-olyig7")));
                         }
+                        return true;
                     }
-                    else
-                    for(int i=0;i<(-1*noClicks);i++){
-                        element.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[1]")).click();;
-                        //Thread.sleep(3000);
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("MuiBox-root css-olyig7']")));
+                    else if(noClicks<0){
+                        for(int i=0;i<(-1*noClicks);i++){
+                            element.findElement(By.xpath(".//div[@class='css-u4p24i']/button[1]")).click();;
+                            Thread.sleep(3000);
+                            //System.out.println("neg count");
+                            //wait.until(ExpectedConditions.presenceOfElementLocated(By.className("MuiBox-root css-olyig7']")));
+                        }
+                        return true;
                     }
-
+                    quantity=0;
                     Thread.sleep(3000);
-                    return true;
+                    //return true;
                 }
+                //System.out.println("\n");
             }
 
 

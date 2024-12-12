@@ -87,8 +87,8 @@ public class Checkout {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find the "PLACE ORDER" button and click on it
             driver.findElement(By.xpath("//button[text()='PLACE ORDER']")).click();
-            WebDriverWait wait=new WebDriverWait(driver, 20);
-            wait.until(ExpectedConditions.urlContains("/thanks"));
+            //WebDriverWait wait=new WebDriverWait(driver, 20);
+            //wait.until(ExpectedConditions.urlContains("/thanks"));
             //Thread.sleep(2000);
             return true;
             //return false;

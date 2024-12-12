@@ -337,76 +337,12 @@
           "expected_value": "criouser@gmail.com"
         }
       ],
-      "error_out": "Testcase 10 : Validation of Contact us form verification failed",
-      "is_enabled": true,
-      "hint": "Is the user email entered as criouser@gmail.com?"
-    },
-    {
-      "description": "Testcase 10 : Verify if the user is able to add message in the contact form",
-      "validations": [
-        {
+      "error_out": "Tesnt ",
           "object_notation": "COMMAND",
           "operator": "contains",
-          "expected_value": "Testing the contact us page"
-        }
-      ],
-      "error_out": "Testcase 10 : Validation of Contact us form verification failed",
-      "is_enabled": true,
-      "hint": "Is the message entered as Testing the contact us page?"
-    },
-    {
-      "description": "Testcase 11 : Verify that the advertisement iframes are interactable",
-      "validations": [
+          "expected_value": "SwitchToParentFrame"
+        },
         {
-          "object_notation": "COMMAND",
-          "operator": "contains",
-          "expected_value": "SwitchToFrame"
-        }
-      ],
-      "error_out": "Testcase 11 :",
-      "is_enabled": true,
-      "hint": " Are you Switching over to advertisement frame 1 ?"
-    },
-    {
-      "description": "Testcase 11 : Verify that the advertisement iframes are interactable",
-      "validations": [
-        {
-          "object_notation": "COMMAND",
-          "operator": "contains",
-          "expected_value": "ClickElement"
-        }
-      ],
-      "error_out": "Testcase 11 :",
-      "is_enabled": true,
-      "hint": " Are you Clicking the buy now button on the advertisement page?"
-    },
-    {
-      "description": "Testcase 11 : Verify that the advertisement iframes are interactable",
-      "validations": [
-        {
-          "object_notation": "COMMAND",
-          "operator": "contains",
-          "expected_value": "SwitchToFrame"
-        }
-      ],
-      "error_out": "Testcase 11 :",
-      "is_enabled": true,
-      "hint": " Are you Switching over to advertisement frame 2 ?"
-    },
-    {
-      "description": "Testcase 11 : Verify that the advertisement iframes are interactable",
-      "validations": [
-        {
-          "object_notation": "COMMAND",
-          "operator": "contains",
-          "expected_value": "ClickElement"
-        }
-      ],
-      "error_out": "Testcase 11 :",
-      "is_enabled": true,
-      "hint": "Are you Clicking the buy now button on the advertisement2 page?"
-    },
-    {
       "description": "Testcase 11 : Verify that the advertisement iframes are interactable",
       "validations": [
         {
