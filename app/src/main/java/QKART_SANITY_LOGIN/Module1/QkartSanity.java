@@ -214,6 +214,7 @@ public class QkartSanity {
             // Verify that all results contain the searched text
 
             String elementText = resultelement.getTitleofResult();
+            status=elementText.equals("YONEX Smash Badminton Racquet");
             if (!elementText.toUpperCase().contains("YONEX")) {
                 logStatus("TestCase 3", "Test Case Failure. Test Results contains un-expected values: " + elementText,
                         "FAIL");
