@@ -129,9 +129,34 @@ public class SearchResult {
              * Validate that the contents of expectedTableBody are present in the table body
              * in the same order
              */
-            return status;
+            // //WebElement table= driver.findElement(By.tagName("table"));
+            List<WebElement> hrow=driver.findElements(By.xpath("//table/thead/tr/th"));
+            for(int i=0;i<hrow.size();i++){
+                String td= hrow.get(i).getText();
+                //System.out.println(td + expectedTableHeaders.get(i));
+                if(!td.trim().equals(expectedTableHeaders.get(i))){
+                    status=false;
+                }
+            }
+            // System.out.println("header verified");
+            
+            List<WebElement> body=driver.findElements(By.xpath("//table/tbody/tr"));
+            //System.out.println(body.size());
+            for(int i=1;i<=body.size();i++){
+                List<String> expectedbd=expectedTableBody.get(i-1);
+                for(int j=1;j<=hrow.size();j++){
+                    String td= driver.findElement(By.xpath("//table/tbody/tr["+i+"]/td["+j+"]")).getText();
+                    //System.out.print(td+" ");
+                    if(!td.trim().equals(expectedbd.get(j-1))){
+                        status=false;
+                    }
 
-        } catch (Exception e) {
+                }
+                //System.out.println("\n");
+            }
+            return status;
+        }
+        catch (Exception e) {
             System.out.println("Error while validating chart contents");
             return false;
         }

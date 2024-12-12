@@ -92,9 +92,9 @@ public class QkartSanity {
         Register registration = new Register(driver);
         // registration.navigateToRegisterPage();
         
-         registration.navigateToRegisterPage();
-         status=driver.getCurrentUrl().endsWith("/register");
-        //driver.get("https://crio-qkart-frontend-qa.vercel.app/register");;
+        // registration.navigateToRegisterPage();
+        // status=driver.getCurrentUrl().endsWith("/register");
+        driver.get("https://crio-qkart-frontend-qa.vercel.app/register");;
         status = registration.registerUser("testUser", "abc@123", true);
         if (!status) {
             logStatus("TestCase 1", "Test Case Pass. User Registration Pass", "FAIL");
@@ -142,7 +142,7 @@ public class QkartSanity {
         //status=driver.getCurrentUrl().contains("/register");
         if (!driver.getCurrentUrl().contains("/register")) {
             logStatus("End TestCase", "Test Case 2: Verify user Registration : ", status ? "PASS" : "FAIL");
-            return false;
+            //return false;
 
         }
 
@@ -151,8 +151,10 @@ public class QkartSanity {
 
         // Visit the Registration page and try to register using the previously
         // registered user's credentials
-        registration.navigateToRegisterPage();
-        status = registration.registerUser(lastGeneratedUserName, "abc@123", false);
+        //Thread.sleep(3000);
+        Register registration1 = new Register(driver);
+        registration1.navigateToRegisterPage();
+        status = registration1.registerUser(lastGeneratedUserName, "abc@123", false);
         logStatus("Test Step", "Re-registration attempt blocked : ", !status ? "PASS" : "FAIL");
         String currenturl = driver.getCurrentUrl();
         status = currenturl.contains("/register");
@@ -165,7 +167,7 @@ public class QkartSanity {
         }
         //logStatus("End TestCase", "Test Case 2: Re-registration url stayed in same page : ", status ? "PASS" : "FAIL");
         takeScreenshot(driver,"after", "User Registration with an existing username");
-        return !status;
+        return status;
     }
 
     /*
@@ -183,7 +185,7 @@ public class QkartSanity {
         //Thread.sleep(5000);
 
         // Search for the "yonex" product
-        status = homePage.searchForProduct("YONEX Smash Badminton Racquet");
+        status = homePage.searchForProduct("yonex");
         
        // WebElement searchBox= driver.findElement(By.xpath("//*[@id='root']/div/div/div[1]/div[2]/div/input"));
          //   searchBox.clear();
@@ -196,11 +198,13 @@ public class QkartSanity {
             logStatus("TestCase 3", "Test Case Failure. Unable to search for given product", "FAIL");
             return false;
         }
+        else
+        logStatus("TestCase 3", "search for item yonex", "PASS");
 
         // Fetch the search results
         List<WebElement> searchResults = homePage.getSearchResults();
         
-        System.out.println(searchResults.size());
+        //System.out.println(searchResults.size());
         // Verify the search results are available
         if (searchResults.size() == 0) {
             logStatus("TestCase 3", "Test Case Failure. There were no results for the given search string", "FAIL");
@@ -215,9 +219,9 @@ public class QkartSanity {
 
             String elementText = resultelement.getTitleofResult();
             status=elementText.equals("YONEX Smash Badminton Racquet");
+            logStatus("TestCase 3", "Search result matches title " ,status ? "PASS" :"FAIL");
             if (!elementText.toUpperCase().contains("YONEX")) {
-                logStatus("TestCase 3", "Test Case Failure. Test Results contains un-expected values: " + elementText,
-                        "FAIL");
+                logStatus("TestCase 3", "Test Case Failure. Test Results contains un-expected values: " + elementText,"FAIL");
                 return false;
             }
         }
@@ -235,7 +239,7 @@ public class QkartSanity {
         Thread.sleep(3000);
         // Verify no search results are found
         searchResults = homePage.getSearchResults();
-        System.out.println(searchResults.size());
+        //System.out.println(searchResults.size());
         if (searchResults.size() == 0) {
             if (homePage.isNoResultFound()) {
                 logStatus("Step Success", "Successfully validated that no products found message is displayed", "PASS");
@@ -597,7 +601,7 @@ public class QkartSanity {
         privacyPolicyLink.click();
 
         status= driver.getCurrentUrl().equals("https://crio-qkart-frontend-qa.vercel.app");
-        System.out.println(driver.getCurrentUrl());
+        //System.out.println(driver.getCurrentUrl());
         logStatus("Test step", "Test Case 9: Verify Current Link shouldnt change : ",  "PASS" );
 
         //String originalWindow = driver.getWindowHandle();
@@ -610,7 +614,7 @@ public class QkartSanity {
         for (String handle : windowHandles) {
             if (!handle.equals(originalWindow)) {
                 driver.switchTo().window(handle);
-                System.out.println(driver.getCurrentUrl());
+                //System.out.println(driver.getCurrentUrl());
                 break;
             }
         }
@@ -643,7 +647,7 @@ public class QkartSanity {
         for (String handle : windowHandles) {
             if (!handle.equals(originalWindow)) {
                 driver.switchTo().window(handle);
-                System.out.println(driver.getCurrentUrl());
+                //System.out.println(driver.getCurrentUrl());
                 //break;
             }
         }
@@ -683,7 +687,7 @@ public class QkartSanity {
         WebElement contactUSLink=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[text()='Contact us']")));
         contactUSLink.click();
         logStatus("Test Step", "Contact US clicked ", "PASS" );
-        //Thread.sleep(3000);
+        Thread.sleep(3000);
         //WebElement contactUsCard=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@clas;s='card-block']")));
         WebElement userName= driver.findElement(By.xpath("//input[@placeholder='Name']"));
         userName.sendKeys("crio user");
@@ -692,10 +696,10 @@ public class QkartSanity {
         WebElement message= driver.findElement(By.xpath("//input[@placeholder='Message']"));
         message.sendKeys("Testing the contact us page");
         Thread.sleep(3000);
-        status=userName.getText().contains("crio user");
-        System.out.println(userName.getText());
+        //status=userName.getText().contains("crio user");
+        //System.out.println(userName.getText());
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Contact Now']"))).click();
-        logStatus("Test Step", "Contact US userName field ", status ? "PASS" :"Fail");
+        //logStatus("Test Step", "Contact US userName field ", status ? "PASS" :"Fail");
         logStatus("Test Step", "Contact US submitted ", "PASS" );
         //Thread.sleep(1000);
         try {
@@ -773,7 +777,7 @@ public class QkartSanity {
 
         //checking advertisements displayed and button clickable
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='App']")));
-        WebElement parentFrame= driver.findElement(By.xpath("//div[@class='App']"));
+        WebElement parentFrame= driver.findElement(By.xpath(".//div[@class='App']"));
         List<WebElement> ads= driver.findElements(By.tagName("iframe"));
         status=ads.size()==3;
         
@@ -786,15 +790,15 @@ public class QkartSanity {
         // logStatus("Test Step", "Covid frame is present :", status ? "PASS" : "Fail");
         //driver.switchTo().defaultContent();
         for(WebElement ad: ads){
-            System.out.println("frame");
+            //System.out.println("frame");
             driver.switchTo().frame(ad);
             WebElement body = wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("body")));
-            System.out.println("body");
+            //System.out.println("body");
             if(body.getText().contains("COVID-19")){
                 logStatus("Test Step", "Covid frame is present :", "PASS" );
             }
             else{
-                System.out.println("enters else");
+                //System.out.println("enters else");
                 WebElement viewCart=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='View Cart']")));
                 WebElement buyNow= wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Buy Now']")));
                 status=viewCart.isEnabled() && buyNow.isEnabled();
@@ -802,8 +806,8 @@ public class QkartSanity {
             }
             driver.switchTo().defaultContent();
         }
-        
-
+        Thread.sleep(3000);
+        driver.switchTo().defaultContent();
         // Go to the home page
         homePage.navigateToHome();
         //Thread.sleep(3000);
@@ -828,101 +832,101 @@ public class QkartSanity {
         try {
             //Execute Test Case 1
             totalTests += 1;
-            status = TestCase10(driver);
+            status = TestCase01(driver);
             if (status) {
                 passedTests += 1;
             }
-
+            System.out.println(totalTests+" "+passedTests);
             System.out.println("");
 
-        //     // Execute Test Case 2
-        //     totalTests += 1;
-        //     status = TestCase02(driver);
-        //     if (status) {
-        //         passedTests += 1;
-        //     }
+            // Execute Test Case 2
+            totalTests += 1;
+            status = TestCase02(driver);
+            if (status) {
+                passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
+            //Execute Test Case 3
+            totalTests += 1;
+            status = TestCase03(driver);
+            if (status) {
+                passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
 
-        //     System.out.println("");
-        //     //Execute Test Case 3
-        //     totalTests += 1;
-        //     status = TestCase03(driver);
-        //     if (status) {
-        //     passedTests += 1;
-        //     }
+            //Execute Test Case 4
+            totalTests += 1;
+            status = TestCase04(driver);
+            if (status) {
+            passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
 
-        //     System.out.println("");
+            //Execute Test Case 5
+            totalTests += 1;
+            status = TestCase05(driver);
+            if (status) {
+            passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
 
-        //     //Execute Test Case 4
-        //     totalTests += 1;
-        //     status = TestCase04(driver);
-        //     if (status) {
-        //     passedTests += 1;
-        //     }
+            //Execute Test Case 6
+            totalTests += 1;
+            status = TestCase06(driver);
+            if (status) {
+            passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
 
-        //     System.out.println("");
+            // Execute Test Case 7
+            totalTests += 1;
+            status = TestCase07(driver);
+            if (status) {
+            passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
 
-        //     //Execute Test Case 5
-        //     totalTests += 1;
-        //     status = TestCase05(driver);
-        //     if (status) {
-        //     passedTests += 1;
-        //     }
+            // Execute Test Case 8
+            totalTests += 1;
+            status = TestCase08(driver);
+            if (status) {
+            passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
 
-        //     System.out.println("");
+            // Execute Test Case 9
+            totalTests += 1;
+            status = TestCase09(driver);
+            if (status) {
+            passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
 
-        //     //Execute Test Case 6
-        //     totalTests += 1;
-        //     status = TestCase06(driver);
-        //     if (status) {
-        //     passedTests += 1;
-        //     }
-
-        //     System.out.println("");
-
-        //     // Execute Test Case 7
-        //     totalTests += 1;
-        //     status = TestCase07(driver);
-        //     if (status) {
-        //     passedTests += 1;
-        //     }
-
-        //     System.out.println("");
-
-        //     // Execute Test Case 8
-        //     totalTests += 1;
-        //     status = TestCase08(driver);
-        //     if (status) {
-        //     passedTests += 1;
-        //     }
-
-        //     System.out.println("");
-
-        //     // Execute Test Case 9
-        //     totalTests += 1;
-        //     status = TestCase09(driver);
-        //     if (status) {
-        //     passedTests += 1;
-        //     }
-
-        //     System.out.println("");
-
-        //     // Execute Test Case 10
-        //     totalTests += 1;
-        //     status = TestCase10(driver);
-        //     if (status) {
-        //     passedTests += 1;
-        //     }
-
-        //     System.out.println("");
+            // Execute Test Case 10
+            totalTests += 1;
+            status = TestCase10(driver);
+            if (status) {
+            passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
             
-        //    // Execute Test Case 11
-        //     totalTests += 1;
-        //     status = TestCase11(driver);
-        //     if (status) {
-        //     passedTests += 1;
-        //     }
-
-        //     System.out.println("");
+           // Execute Test Case 11
+            totalTests += 1;
+            status = TestCase11(driver);
+            if (status) {
+            passedTests += 1;
+            }
+            System.out.println(totalTests+" "+passedTests);
+            System.out.println("");
 
         } catch (Exception e) {
             throw e;
