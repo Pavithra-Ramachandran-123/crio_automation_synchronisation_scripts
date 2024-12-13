@@ -807,7 +807,8 @@ public class QkartSanity {
             driver.switchTo().defaultContent();
         }
         Thread.sleep(3000);
-        driver.switchTo().defaultContent();
+        driver.switchTo().parentFrame();
+
         // Go to the home page
         homePage.navigateToHome();
         //Thread.sleep(3000);
